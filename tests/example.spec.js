@@ -9,6 +9,7 @@ test('Login with invalid credential', async ({ page }) => {
   await page.locator('[data-test="login-button"]').click();
   const heading = page.locator('h3');
   await expect(heading).toContainText(/.*Username and password do not match any user in this service/);
+  expect(page).toHaveScreenshot();
 });
 
 test('Login with valid credential', async ({ page }) => {
@@ -21,6 +22,7 @@ test('Login with valid credential', async ({ page }) => {
   await page.locator('[data-test="login-button"]').click();
   await expect(page).toHaveTitle(/Swag Labs/);
   await expect(page).toHaveURL(/.*inventory.html/);
+  expect(page).toHaveScreenshot();
 });
 
 test('Product Order', async ({ page }) => {
@@ -45,37 +47,5 @@ test('Product Order', async ({ page }) => {
   await page.locator('[data-test="finish"]').click();
   const span = page.locator('span');
   await expect(span).toContainText(/.*Checkout: Complete!/);
-  // await page.getByText('Checkout: Complete!').click();
-  // await page.getByRole('heading', { name: 'Thank you for your order!' }).click();
+  expect(page).toHaveScreenshot();
 });
-
-
-// @ts-check
-// const { test, expect } = require('@playwright/test');
-
-// test('has title', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Expect a title "to contain" a substring.
-//   await expect(page).toHaveTitle(/Playwright/);
-// });
-
-// test('get started link', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Click the get started link.
-//   await page.getByRole('link', { name: 'Get started' }).click();
-
-//   // Expects the URL to contain intro.
-//   await expect(page).toHaveURL(/.*intro/);
-// });
-
-// import { test, expect } from '@playwright/test';
-
-// test('tes to do', async ({ page }) => {
-//   await page.goto('https://demo.playwright.dev/todomvc/');
-//   await page.goto('https://demo.playwright.dev/todomvc/#/');
-//   await page.getByPlaceholder('What needs to be done?').click();
-//   await page.getByPlaceholder('What needs to be done?').fill('Bangun Siang');
-//   await page.getByPlaceholder('What needs to be done?').press('Enter');
-// });
